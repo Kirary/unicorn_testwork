@@ -1,22 +1,23 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { callApiCategories } from "../api/apiMocks";
+import { callApiCategories, callApiItems } from "../api/apiMocks";
 import AC from "./actionTypes";
+import { categoriesLoaded, categoriesLoadFailed, itemsLoaded, itemsLoadFailed } from "./actions";
 
 function* fetchCategories() {
     try {
         const categories = yield call(callApiCategories);
-        yield put({ type: AC.categories.success, categories });
+        yield put(categoriesLoaded(categories));
     } catch (e) {
-        yield put({ type: AC.categories.failed, message: e.message });
+        yield put(categoriesLoadFailed());
     }
 }
 
 function* fetchItems() {
     try {
-        const items = yield call(callApiCategories);
-        yield put({ type: AC.items.success, items });
+        const items = yield call(callApiItems);
+        yield put(itemsLoaded(items));
     } catch (e) {
-        yield put({ type: AC.items.failed, message: e.message });
+        yield put(itemsLoadFailed());
     }
 }
 
