@@ -11,6 +11,8 @@ const createTypes = (name) => {
 const actionTypes = {
     ...createTypes("categories"),
     ...createTypes("items"),
+    setSelectedCategory: "SELECT_CATEGORY",
+    setSelectedItem: "SELECT_ITEM",
 };
 
 export default actionTypes;

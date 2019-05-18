@@ -19,3 +19,6 @@ export const itemsLoaded = (items) => ({
 });
 
 export const itemsLoadFailed = () => ({ type: AC.items.failed });
+
+export const setSelectedCategoryId = (id) => ({type: AC.setSelectedCategory, id})
+export const setSelectedItemId = (id) => ({type: AC.setSelectedItem, id})

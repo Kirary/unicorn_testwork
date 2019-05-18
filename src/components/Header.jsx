@@ -15,7 +15,9 @@ const styles = (theme) =>
 class Header extends React.Component {
     render() {
         const { classes } = this.props;
-        return <Paper className={classes.root}> header </Paper>;
+        return <Paper className={classes.root}>
+        header 
+        </Paper>;
     }
 }
 

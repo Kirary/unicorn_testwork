@@ -14,7 +14,9 @@ const initialState = {
         fetching: false,
         failed: false,
     },
-    selectedItems: {}
+    selectedCategoryId: undefined,
+    selectedItemId: undefined,
+    selectedItemsId: {},
 };
 
 export default function(state = initialState, action) {
@@ -23,7 +25,7 @@ export default function(state = initialState, action) {
             return state;
         }
         case AC.categories.success: {
-            const categories = { ...state.categories, data: action.categories };
+            const categories = { ...state.categories, data: action.categories, fetched: true, fetching: false };
             return {
                 ...state,
                 categories,
@@ -36,7 +38,6 @@ export default function(state = initialState, action) {
             return state;
         }
         case AC.items.success: {
-
             // {"id":1,"category_id":8,"title":"\u0422\u043e\u0432\u0430\u0440 1","quantity":12,"price":427.6}
 
             const dictionaryByCategoryId = {};
@@ -64,6 +65,12 @@ export default function(state = initialState, action) {
         }
         case AC.items.failed: {
             return state;
+        }
+        case AC.setSelectedCategory: {
+            return { ...state, selectedCategoryId: action.id };
+        }
+        case AC.setSelectedItem: {
+            return { ...state, selectedItemId: action.id };
         }
         default:
             return state;
