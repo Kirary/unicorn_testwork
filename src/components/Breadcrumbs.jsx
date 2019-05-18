@@ -6,8 +6,16 @@ import { connect } from "react-redux";
 const styles = (theme) =>
     createStyles({
         root: {
-            padding: `${theme.spacing.unit}px ${theme.spacing.unit * 4}px`,
-            background: "gold",
+            flex: "none",
+            padding: `${theme.spacing.unit / 2}px ${theme.spacing.unit * 4}px`,
+            background: theme.palette.primary.dark,
+            height: 35,
+            boxSizing: 'border-box',
+            color: "white",
+            "& a": {
+                color: theme.palette.primary.light,
+                textDecoration: "none",
+            }
         },
         spaceAround: {
             padding: theme.spacing.unit,
