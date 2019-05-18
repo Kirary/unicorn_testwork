@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Paper, withStyles, Typography } from "@material-ui/core";
 import { connect } from "react-redux";
-import { setSelectedCategoryId, setSelectedItemId } from "../../redux/actions";
+import { setSelectedCategoryId, setSelectedItemId, addItemToCart } from "../../redux/actions";
 import Counter from "../Counter";
 import styles from "./styles";
 
@@ -18,7 +18,8 @@ class ItemView extends React.Component {
     }
 
     render() {
-        const { item, classes } = this.props;
+        const { item, classes, itemsInCart } = this.props;
+        const amountInCart = itemsInCart[item.id] ? itemsInCart[item.id] : 0;
         return (
             <div className={classes.root}>
                 <Paper className={classes.paper}>
@@ -28,9 +29,9 @@ class ItemView extends React.Component {
                             <Counter
                                 value={this.state.counter}
                                 onChange={this.onCounterChange}
-                                maxCount={item.quantity}
+                                maxCount={item.quantity - amountInCart}
                             />
-                            <Button variant="contained" color="primary" className={classes.button} size="large">
+                            <Button variant="contained" color="primary" className={classes.button} size="large" onClick={this.buyHandler} disabled={this.state.counter === 0}>
                                 Купить
                             </Button>
                         </div>
@@ -56,16 +57,23 @@ class ItemView extends React.Component {
     onCounterChange = (count) => {
         this.setState({ counter: count });
     };
+
+    buyHandler = () => {
+        this.props.addItemToCart(this.props.item.id, this.state.counter);
+        this.setState({counter: 0});
+    }
 }
 
 const mapStateToProps = (state) => ({
     selectedCategoryId: state.selectedCategoryId,
     selectedItemId: state.selectedItemId,
+    itemsInCart: state.itemsInCart,
 });
 
 const dispatchToProps = {
     setSelectedCategoryId,
     setSelectedItemId,
+    addItemToCart,
 };
 
 export default connect(

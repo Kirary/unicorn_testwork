@@ -22,3 +22,6 @@ export const itemsLoadFailed = () => ({ type: AC.items.failed });
 
 export const setSelectedCategoryId = (id) => ({type: AC.setSelectedCategory, id})
 export const setSelectedItemId = (id) => ({type: AC.setSelectedItem, id})
+
+export const addItemToCart = (id, amount) => ({type: AC.addToCart, id, amount});
+export const deleteFromCart = (id) => ({type: AC.deleteFromCart, id});

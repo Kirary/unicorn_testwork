@@ -13,6 +13,8 @@ const actionTypes = {
     ...createTypes("items"),
     setSelectedCategory: "SELECT_CATEGORY",
     setSelectedItem: "SELECT_ITEM",
+    addToCart: "ADD_TO_CART",
+    deleteFromCart: "DELETE_FROM_CART",
 };
 
 export default actionTypes;

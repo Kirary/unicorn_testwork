@@ -16,7 +16,7 @@ const initialState = {
     },
     selectedCategoryId: undefined,
     selectedItemId: undefined,
-    selectedItemsId: {},
+    itemsInCart: {},
 };
 
 export default function(state = initialState, action) {
@@ -71,6 +71,15 @@ export default function(state = initialState, action) {
         }
         case AC.setSelectedItem: {
             return { ...state, selectedItemId: action.id };
+        }
+        case AC.addToCart: {
+            const itemsInCart = {...state.itemsInCart};
+            if (itemsInCart[action.id]) {
+                itemsInCart[action.id] = itemsInCart[action.id] + action.amount;
+            } else {
+                itemsInCart[action.id] = action.amount;
+            }
+            return {...state, itemsInCart}
         }
         default:
             return state;
