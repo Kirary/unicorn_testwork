@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import CategoriesContainer from "./components/CategoriesContainer";
 import ItemsContainer from "./components/ItemsContainer";
 import ItemViewContainer from "./components/ItemViewContainer";
@@ -34,10 +34,12 @@ class App extends React.Component {
                 <Header />
                 <Breadcrumbs />
                 <div className={classes.routeContainer}>
-                    <Route exact path="/" component={CategoriesContainer} />
-                    <Route exact path="/category/:id" component={ItemsContainer} />
-                    <Route exact path="/item/:id" component={ItemViewContainer} />
-                    <Route component={Page404}/>
+                    <Switch>
+                        <Route exact path="/" component={CategoriesContainer} />
+                        <Route exact path="/category/:id" component={ItemsContainer} />
+                        <Route exact path="/item/:id" component={ItemViewContainer} />
+                        <Route component={Page404} />
+                    </Switch>
                 </div>
             </div>
         );
