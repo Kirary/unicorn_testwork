@@ -8,6 +8,7 @@ import Breadcrumbs from "./components/Breadcrumbs";
 import { createStyles, withStyles } from "@material-ui/core";
 import { connect } from "react-redux";
 import { getItems, getCategories } from "./redux/actions";
+import Page404 from "./components/Page404";
 
 const styles = () =>
     createStyles({
@@ -36,6 +37,7 @@ class App extends React.Component {
                     <Route exact path="/" component={CategoriesContainer} />
                     <Route exact path="/category/:id" component={ItemsContainer} />
                     <Route exact path="/item/:id" component={ItemViewContainer} />
+                    <Route component={Page404}/>
                 </div>
             </div>
         );

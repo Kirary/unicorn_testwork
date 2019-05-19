@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setSelectedCategoryId, setSelectedItemId } from "../redux/actions";
 import ItemCard from "./ItemCard";
 import { history } from "../Root";
+import { Link } from "react-router-dom";
 
 const styles = (theme) =>
     createStyles({
@@ -21,17 +22,26 @@ class ItemsContainer extends React.Component {
     render() {
         const { items, classes, match } = this.props;
 
-        const item = items && items[match.params.id] ? items[match.params.id] : [];
+        const itemsInCategory = items && items[match.params.id] ? items[match.params.id] : [];
 
-        const itemCards = item.map((item) => <ItemCard item={item} key={item.id} onClick={this.handleCardClick(item.id)}/>);
+        const itemCards = itemsInCategory.map((item) => (
+            <ItemCard item={item} key={item.id} onClick={this.handleCardClick(item.id)} />
+        ));
 
         return (
             <Grid className={classes.root} container spacing={16}>
-                {itemCards}
+                {itemCards.length > 0 ? (
+                    itemCards
+                ) : (
+                    <div style={{ margin: "40vh auto", textAlign: "center" }}>
+                        <div>В этой категории нет товара</div>
+                        <Link to="/">Вернуться в каталог</Link>
+                    </div>
+                )}
             </Grid>
         );
     }
-    
+
     handleCardClick = (id) => () => {
         this.props.setSelectedItemId(id);
         history.push(`/item/${id}`);
