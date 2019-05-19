@@ -14,6 +14,7 @@ const actionTypes = {
     setSelectedCategory: "SELECT_CATEGORY",
     setSelectedItem: "SELECT_ITEM",
     addToCart: "ADD_TO_CART",
+    updateItemInCart: "UPDATE_CART",
     deleteFromCart: "DELETE_FROM_CART",
 };
 

@@ -73,13 +73,26 @@ export default function(state = initialState, action) {
             return { ...state, selectedItemId: action.id };
         }
         case AC.addToCart: {
-            const itemsInCart = {...state.itemsInCart};
+            const itemsInCart = { ...state.itemsInCart };
+
             if (itemsInCart[action.id]) {
                 itemsInCart[action.id] = itemsInCart[action.id] + action.amount;
             } else {
                 itemsInCart[action.id] = action.amount;
             }
-            return {...state, itemsInCart}
+            return { ...state, itemsInCart };
+        }
+        case AC.updateItemInCart: {
+            const itemsInCart = { ...state.itemsInCart };
+            itemsInCart[action.id] = action.amount;
+
+            return { ...state, itemsInCart };
+        }
+        case AC.deleteFromCart: {
+            const itemsInCart = { ...state.itemsInCart };
+            delete itemsInCart[action.id];
+
+            return { ...state, itemsInCart };
         }
         default:
             return state;
