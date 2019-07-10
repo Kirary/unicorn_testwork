@@ -16,6 +16,7 @@ const actionTypes = {
     addToCart: "ADD_TO_CART",
     updateItemInCart: "UPDATE_CART",
     deleteFromCart: "DELETE_FROM_CART",
+    ...createTypes("remitPayment"),
 };
 
 export default actionTypes;
